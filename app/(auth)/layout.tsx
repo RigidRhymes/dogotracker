@@ -4,13 +4,17 @@ import { Raleway } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import {headers} from "next/headers";
+import {redirect} from "next/navigation";
 
 const raleway = Raleway({
     subsets: ['latin'],
     weight: ['100','400', '700']
 })
 
-const Layout = ({children} : {children: React.ReactNode}) => {
+const Layout = async ({children} : {children: React.ReactNode}) => {
+const session = await auth.api.getSession({headers: await headers()})
+    if(session?.user) redirect('/')
 
   return (
     <main className='flex flex-col justify-between lg:flex-row h-screen bg-linear-to-b from-blue-950 to-black overflow-hidden'>

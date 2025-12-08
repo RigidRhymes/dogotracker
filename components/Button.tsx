@@ -22,7 +22,8 @@ const Button = ({label, onClick,  type, className='', variant='primary', disable
    const variants ={
     primary: 'bg-linear-to-r from-orange-400 to-orange-700 z-50 hover:transform hover:transition',
     secondary: 'bg-transparent border-1 border-white',
-    danger: 'bg-red-600 text-white hover:bg-red-700'
+    danger: 'bg-red-600 text-white hover:bg-red-700',
+       outline: "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
    }
   return (
     <button 

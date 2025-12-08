@@ -23,7 +23,24 @@ type SignUpFormData = {
     email: string;
     password: string;
     country: string;
-    
+    };
+
+type SignInFormData ={
+    email: string;
+    password: string;
+}
+type CountrySelectProps = {
+    name: string;
+    label: string;
+    control: Control;
+    error?: FieldError;
+    required?: boolean;
+}
+
+type FooterLinkProps = {
+    text: string;
+    linkText: string;
+    href: string;
 }
 }
 

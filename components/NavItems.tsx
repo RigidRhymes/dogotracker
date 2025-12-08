@@ -6,11 +6,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 
-
-const orbitron = Orbitron({
-    subsets: ['latin'],
-    weight: ['400', '700']
-})
 const NavItems = () => {
     const pathname = usePathname()
 
