@@ -7,13 +7,16 @@ const scan_model_1 = require("../db/scan.model");
 exports.scanRouter = (0, express_1.Router)();
 exports.scanRouter.post('/', requireAuth_1.requireAuth, async (req, res) => {
     const { email } = req.body;
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    if (!userId) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
     try {
         const scan = await (0, scan_model_1.createScan)(userId, email);
-        res.status(201).json({ scanId: scan.id });
+        return res.status(201).json({ scanId: scan.id });
     }
     catch (err) {
         console.error('Scan creation failed:', err);
-        res.status(500).json({ error: 'Database error' });
+        return res.status(500).json({ error: 'Database error' });
     }
 });

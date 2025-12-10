@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-export function requireAuth(req: Request, res: Response, next: NextFunction) {
+type RequestWithUser = Request & { user?: JwtPayload & { id: string; email?: string } };
+
+export function requireAuth(req: RequestWithUser, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -18,7 +20,8 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
         // Server misconfiguration: no JWT secret
         return res.status(500).json({ error: 'Server configuration error' });
     }
-
+    console.log('JWT_secret:', secret)
+    console.log('Token', token)
     try {
         const decoded = jwt.verify(token, secret) as JwtPayload | string;
         if (typeof decoded === 'string') {

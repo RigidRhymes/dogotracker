@@ -7,6 +7,7 @@ import CountrySelectField from "@/components/forms/CountrySelectField";
 import {Button} from "@/components/ui/button";
 import FooterLink from "@/components/forms/FooterLink";
 import {signUpWithEmail} from "@/lib/actions/auth.actions";
+import { toast } from 'sonner';
 
 const SignUp = () => {
 const router = useRouter()
@@ -22,10 +23,10 @@ const {register, handleSubmit, control, formState: {errors, isSubmitting}, } = u
     const onSubmit = async (data: SignUpFormData) => {
     try {
         const result = await signUpWithEmail(data)
-        if(result.success) router.push('/')
+        if(result) router.push('/')
     }catch (e){
         console.error(e)
-        toast.errr('Sign up failed. Please try again later', {
+        toast.error('Sign up failed. Please try again later', {
             description: e instanceof Error ? e.message : 'Failed to sign up'
         })
     }
