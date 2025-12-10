@@ -6,6 +6,7 @@ import Link from 'next/link'
 import React from 'react'
 import {headers} from "next/headers";
 import {redirect} from "next/navigation";
+import {auth} from "@/lib/better-auth/auth";
 
 const raleway = Raleway({
     subsets: ['latin'],
@@ -48,14 +49,14 @@ const session = await auth.api.getSession({headers: await headers()})
                     <span>Intelligent,</span>
                     <span>Dynamic,</span>
                     <hr className='border-blue-600'/>
-                    <div className={`text-white flex flex-col font-normal tracking-normal text-[18px] leading-8 drop-shadow-2xl shadow-black ${raleway.className}`}>
+                    <div className={`text-white flex flex-col font-normal tracking-normal text-[14px] leading-8 drop-shadow-2xl shadow-black ${raleway.className}`}>
                         <span>Mitigate every risk and shut down threats across every attack</span>
                         <span>surface with Self-Learning AI that adapts to your business.</span>
             </div>
                 </div>                
             </div>
            <BackgroundLines className='flex items-center justify-center w-full flex-col px-4 z-20'>
-                <div className='w-[600px] h-[300px] '> <Image src='/ai-mobile.png' alt='ai-mobile' width={350} height={200} className='object-fit absolute bottom-0 left-20'/></div>
+                <div className='w-[400px] h-[200px] '> <Image src='/ai-mobile.png' alt='ai-mobile' width={250} height={150} className='object-fit absolute bottom-0 left-20'/></div>
            </BackgroundLines>
         </section>
     </main>

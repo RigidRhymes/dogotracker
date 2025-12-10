@@ -8,6 +8,7 @@ import { CARD_ITEMS } from '@/lib/constants'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { useEffect, useRef, useState } from 'react'
 import Testimonial from '@/components/Testimonial'
+import {useRouter} from "next/navigation";
 
 
 const raleway = Raleway({
@@ -21,8 +22,11 @@ const orbitron = Orbitron({
 })
 const Page = () => {
     const containerRef = useRef<HTMLDivElement>(null)
-   
+    const router = useRouter()
 
+    const handleClick = () => {
+        router.push('/demo')
+    }
     
   return (
     <div className='w-full h-auto relative overflow-hidden '>
@@ -50,7 +54,7 @@ const Page = () => {
             </div>
         <div className='md:flex md:flex-row absolute flex-col gap-2 '>
                 <Button label='Explore the platform' variant='primary' onClick={() => alert('Submitted')}/> 
-                <Button variant='secondary' label='Get a demo' onClick={() => alert('You press my yansh')}  className='hidden md:flex'/>
+                <Button variant='secondary' label='Get a demo' onClick={handleClick}  className='hidden md:flex'/>
              </div>
         </div>
         <div className={`${raleway.className} mb-3 md:font-bold tracking-tight font-semibold text-center mt-7 text-[35px] md:text-[40px] w-full h-50 px-4 flex justify-center`}>

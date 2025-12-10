@@ -1,5 +1,6 @@
 'use server'
 import {auth} from '@/lib/better-auth/auth'
+import {headers} from "next/headers";
 
 
 export const signUpWithEmail = async({email, password, fullName, country}) => {
@@ -22,7 +23,7 @@ export const signOUt = async() => {
             headers: await headers()
         })
     }catch (e){
-        cosole.log('Sign out failed', e)
+        console.log('Sign out failed', e)
         return {success: false, error: 'Sign out failed'}
     }
 }
