@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 const token = jwt.sign(
     {
-        userId: 'test-user',
+        id: 'test-user',
         email: 'test@example.com'
     },
     process.env.JWT_SECRET as string,

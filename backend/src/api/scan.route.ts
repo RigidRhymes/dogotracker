@@ -2,7 +2,10 @@ import { Router, Request } from 'express';
 import { requireAuth } from "../middleware/requireAuth";
 import { createScan } from "../db/scan.model";
 import {db} from '../db'
+import {searchEmailMentions} from "./searchMentions";
 
+
+// This file is for search mentions
 export const scanRouter = Router();
 
 scanRouter.post('/', requireAuth, async (req: Request & { user?: { id: string; email?: string } }, res) => {
@@ -14,15 +17,39 @@ scanRouter.post('/', requireAuth, async (req: Request & { user?: { id: string; e
     }
 
     try {
-        const scan = await createScan(userId, email);
+
+        const scan = await createScan(userId, email)
+        res.status(201).json({scanId: scan.id})
       setTimeout(async ()=> {
           try {
+          const urls = await searchEmailMentions(email)
+
+          // This code is for the implementation of API for search queries
+          const result = {
+              breaches: urls.map((url) => ({
+                  name: new URL(url).hostname,
+                  date: new Date().toISOString(),
+                  exposed: ['email'],
+                  risk: 'medium',
+                  source: url
+              })),
+              totalMentions: urls.length
+          }
+          console.log(`Scanning email: ${email}`);
+          console.log(`Found ${urls.length} mentions`);
+
+
               await db.query(
-                  `UPDATE scans SET status = 'completed', updated_at = NOW() WHERE id = $1`,
-                  [scan.id]
+                  `UPDATE scans SET status = 'completed', updated_at = NOW(), result = $2 WHERE id = $1`,
+                  [scan.id, JSON.stringify(result)]
               )
           }catch (err){
-              console.error('Failed to update scan status', err)
+              console.log('Failed to update scan status', err);
+              const errorMessage = err instanceof Error ? err.message : String(err)
+              await db.query(
+                  `UPDATE scans SET status = 'failed', updated_at = NOW(), result = $2 WHERE id = $1`,
+                  [scan.id, JSON.stringify({error: errorMessage.toString()})]
+              )
           }
       }, 5000)
 

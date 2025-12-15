@@ -1,6 +1,7 @@
 import {app} from './server';
 import {db} from './db';
 
+
 const PORT = process.env.PORT || 4000;
 
 db.connect()

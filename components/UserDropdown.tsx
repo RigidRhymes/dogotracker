@@ -26,7 +26,7 @@ const UserDropdown = ({user} :{user: User}) => {
         <DropdownMenuTrigger asChild>
             <Button variant='ghost' className='flex items-center gap-3 text-blue-300 hover:text-yellow-500'>
                 <Avatar className="h-8 w-8 flex items-center justify-center">
-                    <AvatarImage src="https://github.com/shadcn.png"/>
+                    <AvatarImage src=""/>
                     <AvatarFallback className=" text-white flex items-center justify-center text-sm font-bold">
                         {user.name[0]}
                     </AvatarFallback>
