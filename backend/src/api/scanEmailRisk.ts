@@ -1,7 +1,25 @@
-import {checkGravatar, searchEmailMentions} from "../utils/checkGravatar";
+import {checkGravatar, generateAISummary, searchEmailMentions, searchGitHub, emailScanner} from "../utils/checkGravatar";
 
 
-async function scanEmailRisk(email: string) : Promise<ScanResult> {
+
+export interface ScanResult {
+    email: string
+    isValid: boolean
+    hasGravatar: boolean
+    foundOnGitHub: boolean
+    foundInBreaches: boolean
+    publicMentions: string[]
+    summary: string
+}
+
+
+export async function scanEmailRisk(email: string) : Promise<ScanResult> {
+    const isValid = await checkGravatar(email);
+    const hasGravatar = await checkGravatar(email);
+    const foundOnGitHub = await checkGravatar(email);
+    const publicMentions = await checkGravatar(email);
+    const foundInBreaches = false;
+
     const results: ScanResult = {
         email,
         isValid: false,
@@ -13,7 +31,7 @@ async function scanEmailRisk(email: string) : Promise<ScanResult> {
     }
 
 //     1. Email Verification
-    results.isValid = await verifyEmail(email); //via Hunter.io
+    results.isValid = await emailScanner(email); //via Hunter.io
 
 //     2. Gravatar Check
     results.hasGravatar = await checkGravatar(email)

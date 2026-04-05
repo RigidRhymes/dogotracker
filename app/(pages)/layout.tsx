@@ -16,14 +16,13 @@ const Layout = async ({children} : {children: React.ReactNode}) => {
         email: session.user.email,
     }
     return (
-        <main className='min-h-screen bg-black'>
-            <Header user={user}/>
-            <section className='pages-section scrollbar-hide-default'>
-                <p></p>
-                <div className='container mx-auto px-4 '>
-                    {children}
+        <main>
+            <div>
+                <div className='bg-black '>
+                    <Header user={user}/>
                 </div>
-            </section>
+                {children}
+            </div>
         </main>
     )
 }

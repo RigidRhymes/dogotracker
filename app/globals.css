@@ -176,8 +176,9 @@
     @apply text-sm md:text-xl lg:text-2xl font-medium text-gray-400 mb-1 md:mb-6 lg:mb-8;
   }
   .pages-section{
-    @apply w-full h-screen px-6 py-4 md:p-6 lg:py-12 lg:px-18 flex flex-col justify-start
+    @apply w-full h-full bg-black
   }
+
   .pages-right-section {
 
   }

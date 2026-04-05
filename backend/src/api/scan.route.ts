@@ -2,7 +2,7 @@ import { Router, Request } from 'express';
 import { requireAuth } from "../middleware/requireAuth";
 import { createScan } from "../db/scan.model";
 import {db} from '../db'
-import {searchEmailMentions} from "./searchMentions";
+import { scanEmailRisk } from "./scanEmailRisk"
 
 
 // This file is for search mentions
@@ -20,39 +20,48 @@ scanRouter.post('/', requireAuth, async (req: Request & { user?: { id: string; e
 
         const scan = await createScan(userId, email)
         res.status(201).json({scanId: scan.id})
-      setTimeout(async ()=> {
-          try {
-          const urls = await searchEmailMentions(email)
-
-          // This code is for the implementation of API for search queries
-          const result = {
-              breaches: urls.map((url) => ({
-                  name: new URL(url).hostname,
-                  date: new Date().toISOString(),
-                  exposed: ['email'],
-                  risk: 'medium',
-                  source: url
-              })),
-              totalMentions: urls.length
-          }
-          console.log(`Scanning email: ${email}`);
-          console.log(`Found ${urls.length} mentions`);
 
 
-              await db.query(
-                  `UPDATE scans SET status = 'completed', updated_at = NOW(), result = $2 WHERE id = $1`,
-                  [scan.id, JSON.stringify(result)]
-              )
-          }catch (err){
-              console.log('Failed to update scan status', err);
-              const errorMessage = err instanceof Error ? err.message : String(err)
-              await db.query(
-                  `UPDATE scans SET status = 'failed', updated_at = NOW(), result = $2 WHERE id = $1`,
-                  [scan.id, JSON.stringify({error: errorMessage.toString()})]
-              )
-          }
-      }, 5000)
+        setTimeout(async () => {
+            try {
+                const riskResult = await scanEmailRisk(email);
 
+                const breaches = riskResult.publicMentions.map((url: string) => ({
+                    name: new URL(url).hostname,
+                    date: new Date().toISOString(),
+                    exposed: ["email"],
+                    risk: riskResult.hasGravatar || riskResult.foundOnGitHub ? "High" : "Medium",
+                    source: url,
+                }));
+
+                const result = {
+                    breaches,
+                    totalMentions: riskResult.publicMentions.length,
+                    signals: {
+                        isValid: riskResult.isValid,
+                        hasGravatar: riskResult.hasGravatar,
+                        foundOnGitHub: riskResult.foundOnGitHub,
+                        foundInBreaches: riskResult.foundInBreaches,
+                    },
+                    summary: riskResult.summary,
+                };
+
+                console.log(`Scanning email: ${email}`);
+                console.log(`Found ${riskResult.publicMentions.length} mentions`);
+
+                await db.query(
+                    `UPDATE scans SET status = 'completed', updated_at = NOW(), result = $2 WHERE id = $1`,
+                    [scan.id, JSON.stringify(result)]
+                );
+            } catch (err) {
+                console.error("Failed to update scan status", err);
+                const errorMessage = err instanceof Error ? err.message : String(err);
+                await db.query(
+                    `UPDATE scans SET status = 'failed', updated_at = NOW(), result = $2 WHERE id = $1`,
+                    [scan.id, JSON.stringify({ error: errorMessage })]
+                );
+            }
+        }, 5000);
 
     } catch (err) {
         console.error('Scan creation failed:', err);
