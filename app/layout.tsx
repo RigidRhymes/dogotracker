@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Orbitron, Raleway } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+
 
 
 export const dynamic = 'force-dynamic'
