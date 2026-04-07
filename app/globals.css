@@ -529,6 +529,18 @@
 }
 
 
-.hero-image{
-  @apply flex rounded-xl mt-12 items-center justify-center w-[350px] h-[400px]
+.hero-image {
+  @apply flex rounded-2xl aspect-square overflow-hidden mt-12 items-center justify-center w-[350px] h-[400px]
+}
+
+.bg-effect{
+  @apply rounded-full w-[100px] h-[100px] bg-[#00f2ff]/5 blur-2xl -inset-4
+}
+
+.hero-grid{
+  @apply grid grid-cols-2
+}
+
+.primary-col{
+  @apply bg-[#00f2ff]
 }
