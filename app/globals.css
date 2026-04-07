@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "tailwindcss/theme";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -45,7 +46,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: #000000;
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
@@ -81,7 +82,6 @@
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
   --popover-foreground: oklch(0.984 0.003 247.858);
@@ -137,7 +137,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-white text-foreground;
+    @apply bg-black text-foreground;
   }
 }
 
@@ -155,10 +155,11 @@
     @apply w-full gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3;
   }
   .header {
-    @apply z-50 w-full h-[70px] bg-none absolute;
+    @apply w-full sticky top-0 bg-black drop-shadow-xs shadow-[#00F2FF];
   }
+
   .header-wrapper {
-    @apply flex justify-between items-center px-6 py-4 text-gray-500;
+    @apply flex justify-between items-center w-full text-gray-500 px-4;
   }
   .auth-layout {
     @apply bg-blue-300;
@@ -512,3 +513,22 @@
   border-right: 2px solid black;
 }
 
+.exitScan {
+  @apply w-[60px]
+}
+
+.scan-result {
+  @apply text-2xl font-semibold mb-4 text-gray-300 bg-gray-600 p-2 rounded-full w-64 items-center flex justify-center text-center
+}
+
+.hero-text {
+  @apply text-[52px]  font-bold;
+  background: linear-gradient( to right, #e1fdff, #00F2FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.hero-image{
+  @apply flex rounded-xl mt-12 items-center justify-center w-[350px] h-[400px]
+}
