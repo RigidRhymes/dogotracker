@@ -52,10 +52,10 @@ const Page = () => {
                <div className='hero-grid'>
 
                    {/*hero text-grid*/}
-                   <div className='flex justify-start flex-col px-6 mt-12'>
+                   <div className='flex justify-start flex-col mt-12'>
                        <h1 className={`hero-text ${spaceGrotesk.className}`}>DogoTracker</h1>
                        <p className='text-gray-300 text-sm mt-6 mb-4 text-wrap'>Mitigate every risk and shut down threats across every attack surface with Self-Learning AI that adapts to your business. Proactive, Intelligent, Dynamic.</p>
-                       <div className='mt-6 relative flex items-center justify-center'>
+                       <div className='relative flex mt-12'>
                            <div className='bg-[#00f2ff]/30 h-12 absolute w-115 blur-xl  rounded-md'></div>
                            <div className='text-gray-300 text-sm w-110 p-1 z-10 flex flex-row items-center justify-between bg-black rounded-sm'>
                                <ShieldCheck className='w-6 h-6 text-[#00f2ff]'/>
@@ -68,11 +68,11 @@ const Page = () => {
                    </div>
 
                    {/*image grid*/}
-                   <div className='w-full flex justify-end'>
+                   <div className='w-full flex justify-end mt-12'>
                        <div className='relative'>
                            <div className='bg-[#00f2ff]/20 w-[350px] h-[420px] absolute rounded-full blur-3xl'></div>
                            <div className='hero-image border border-[#00f2ff]/20 z-10 shadow-[0_0_50px_rgba(0,242,255,0.1)]'>
-                               <Image src='/dogo-ai.png' alt='hero-ai image' width={200} height={250} className='w-full h-full object-cover z-10' />
+                               <Image src='/dogo-ai.png' alt='hero-ai image' width={350} height={420} className='w-full h-full object-cover z-10' />
                            </div>
                        </div>
                    </div>
