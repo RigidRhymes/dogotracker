@@ -1,11 +1,12 @@
 import {AtSign, MessageSquareDot, PhoneCall, ArrowRight, Mail, Share, Phone} from 'lucide-react'
 
 export const NAV_ITEMS = [
-    {href: '/platform', label: 'EMAIL CHECK'},
-    {href: '/news', label: 'SOCIAL MEDIA CHECK'},
-    {href: '/customers', label: 'PHONE NUMBER CHECK'},
+    {href: '/', label: 'HOME'},
+    {href: '/email-check', label: 'EMAIL CHECK'},
+    {href: '/social-media-check', label: 'SOCIAL MEDIA CHECK'},
+    {href: '/phone-number-check', label: 'PHONE NUMBER CHECK'},
     {href: '/blog', label: 'ABOUT'},
-    {href: '/resources', label: 'RESOURCE'}
+
 ]
 
 export const CARD_ITEMS = [

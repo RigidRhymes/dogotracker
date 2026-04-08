@@ -50,8 +50,8 @@ const Page = () => {
            <div className='px-6 mb-12'>
                <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black'></div>
                <div className='hero-grid'>
-                   <div className='sm:hidden flex h-80 w-80 mt-12'>
-                       <Image src='/aimobile.png' alt='mobile AI image' width={100} height={100} className='object-fit w-full h-full z-10' />
+                   <div className='sm:hidden flex items-center justify-center h-100 w-100 mt-12'>
+                       <Image src='/aimobile.png' alt='mobile AI image' width={100} height={100} className='object-cover w-full h-full z-10' />
                    </div>
 
                    {/*hero text-grid*/}
@@ -62,14 +62,19 @@ const Page = () => {
                                <p className='text-white '>THE SENTIENT</p>
                                <p className='primary-text'>SECURITY LAYER</p>
                            </div>
-                           <p className='text-gray-300 text-sm sm:mt-6 sm:text-start text-center mb-4 text-wrap'>Mitigate every risk and shut down threats across every attack surface with Self-Learning AI that adapts to your business. Proactive, Intelligent, Dynamic.</p>
+                           <div className='text-hero'>Mitigate every risk and shut down threats across every attack surface with Self-Learning AI that adapts to your business.
+                               <div className='sm:flex sm:flex-row primary-text sm:gap-2 font-semibold mt-4'>
+                                   <p>Proactive,</p>
+                                   <p>Intelligent,</p>
+                                   <p>Dynamic.</p>
+                               </div>
+                           </div>
                        </div>
                        <div className='relative flex mt-12 items-center justify-center sm:justify-start'>
-                           <div className='bg-[#00f2ff]/30 h-12 absolute sm:w-115 w-80 blur-xl  rounded-md'></div>
-
-                           <div className='text-gray-300 sm:gap-0 gap-3 text-sm w-80 sm:w-110 sm:p-1 p-2 border border-[#00f2ff]/20 sm:border-0 z-10 flex flex-row items-center justify-between bg-black rounded-sm'>
+                           <div className='bg-[#00f2ff]/30 h-12 absolute sm:w-145 w-80 blur-xl  rounded-md'></div>
+                           <div className='text-gray-300 sm:gap-0 gap-3 text-sm w-80 sm:w-140 sm:p-2 p-2 border border-[#00f2ff]/20 sm:border-0 z-10 flex flex-row items-center justify-between bg-black rounded-sm'>
                                <ShieldCheck className='w-6 h-6 text-[#00f2ff]'/>
-                               <input type='text' placeholder='Enter email, handley or pone number... ' className='sm:p-2 sm:w-82 w-52 active:bg-[#00f2ff]/30  '/>
+                               <input type='text' placeholder='Enter email, handle or pone number... ' className='sm:p-2 sm:w-82 w-52 focus:outline-none focus:ring-1 focus:ring-[#00f2ff]/30'/>
                                <button className='primary-col cursor-pointer p-2 w-28 font-bold text-black items-center jutify-center rounded-md sm:rounded-none'>
                                    Check
                                </button>
@@ -82,12 +87,12 @@ const Page = () => {
                    </div>
 
                    {/*image grid*/}
-                   <div className='w-full sm:flex justify-end mt-12  hidden '>
-                       <div className='relative'>
+                   <div className='w-full sm:flex justify-end mt-4  hidden '>
+                       <div className='relative w-[450px] h-[500px]'>
                            <div className='bg-[#00f2ff]/20 w-[350px] h-[420px] absolute rounded-full blur-3xl'></div>
                            <div className='hero-image border border-[#00f2ff]/20 z-10 shadow-[0_0_50px_rgba(0,242,255,0.1)]'>
-                               <div className='relative shimmer-effect w-[350px] h-[420px] rounded-md border border-[#00f2ff]/20'>
-                               <Image src='/dogo-ai.png' alt='hero-ai image' width={350} height={420} className='w-full h-full object-cover z-10' />
+                               <div className='relative shimmer-effect w-full h-full rounded-md border border-[#00f2ff]/20'>
+                               <Image src='/aimobile.png' alt='hero-ai image' width={450} height={500} className='w-full h-full object-cover z-10' />
                                </div>
                            </div>
                        </div>
@@ -195,4 +200,5 @@ const Page = () => {
         </div>
     )
 }
+// @ts-ignore
 export default Page

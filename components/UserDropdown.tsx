@@ -24,8 +24,8 @@ const UserDropdown = ({user} :{user: User}) => {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <Button variant='ghost' className='flex items-center gap-3 text-blue-300 hover:text-yellow-500'>
-                <Avatar className="h-8 w-8 flex items-center justify-center">
+            <Button variant='ghost' className='flex items-center gap-3 text-[#00F2FF] hover:bg-gray-600 hover:text-yellow-500'>
+                <Avatar className="h-8 w-8 primary-col flex items-center justify-center">
                     <AvatarImage src=""/>
                     <AvatarFallback className=" text-white flex items-center justify-center text-sm font-bold">
                         {user.name[0]}
@@ -36,12 +36,12 @@ const UserDropdown = ({user} :{user: User}) => {
                 </div>
             </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="text-gray-400">
+        <DropdownMenuContent className="text-gray-400 bg-[#00F2FF]">
             <DropdownMenuLabel>
-                <div className="flex relative items-center gap-3 py-2">
-                    <Avatar className="h-10 w-10">
+                <div className="flex relative items-center gap-3 py-2 ">
+                    <Avatar className="h-10 w-10 bg-[#00f2ff]">
                         <AvatarImage src='https://github.com/shadcn.png'/>
-                        <AvatarFallback className="bg-blue-300 text-black text-sm font-bold">
+                        <AvatarFallback className=" text-black text-sm font-bold">
                             {user.name[0]}
                         </AvatarFallback>
                     </Avatar>
@@ -56,7 +56,7 @@ const UserDropdown = ({user} :{user: User}) => {
                 <LogOut className="h-4 w-4 mr-2 sm:block"/> Log Out
             </DropdownMenuItem>
             <DropdownMenuSeparator className="sm:block-gray-600 hidden"/>
-            <nav className="sm:hidden">
+            <nav className="sm:hidden primary-col">
                 <NavItems />
             </nav>
         </DropdownMenuContent>

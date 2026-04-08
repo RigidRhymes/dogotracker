@@ -551,6 +551,10 @@
   background-size: 40px 40px;
 }
 
+.text-hero{
+  @apply text-gray-300 sm:text-2xl sm:mt-6 sm:text-start text-center mb-4 text-wrap
+}
+
 
 .wired-bg::after {
   content: '';
