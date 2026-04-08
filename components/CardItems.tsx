@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {HERO_CARD_ITEMS} from "@/lib/constants";
 import {ArrowRight} from "lucide-react"
 

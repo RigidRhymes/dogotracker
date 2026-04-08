@@ -1,12 +1,11 @@
-import {AtSign, MessageSquareDot, PhoneCall, ArrowRight} from 'lucide-react'
+import {AtSign, MessageSquareDot, PhoneCall, ArrowRight, Mail, Share, Phone} from 'lucide-react'
 
 export const NAV_ITEMS = [
-    {href:'/', label: 'Home'},
-    {href: '/platform', label: 'Platform'},
-    {href: '/news', label: 'News'},
-    {href: '/customers', label: 'Customers'},
-    {href: '/blog', label: 'Blog'},
-    {href: '/resources', label: 'Resources'}
+    {href: '/platform', label: 'EMAIL CHECK'},
+    {href: '/news', label: 'SOCIAL MEDIA CHECK'},
+    {href: '/customers', label: 'PHONE NUMBER CHECK'},
+    {href: '/blog', label: 'ABOUT'},
+    {href: '/resources', label: 'RESOURCE'}
 ]
 
 export const CARD_ITEMS = [
@@ -28,4 +27,10 @@ export const HERO_CARD_ITEMS = [
     {icon: AtSign, title: "EMAIL CHECK", desc: "Deep-scan billions of data breach records to determine if your professional or personal email has been compromised or listed as a target.", sub: "Initialize Scan", arrow: ArrowRight},
     {icon: MessageSquareDot, title: "SOCIAL MEDIA CHECK", desc: "Analyze social handles against AI-identified malicious clusters and automated bot-nets to ensure identity integrity across platforms.", sub: "Verify Identity", arrow: ArrowRight},
     {icon: PhoneCall, title: "PHONE NUMBER CHECK", desc: "Real-time lookup for VOIP masks, scam list associations, and suspicious geographical origin data to block proactive threats.", sub: "Check Carrier", arrow: ArrowRight},
+]
+
+export const MOBILE_CARD_ITEMS = [
+    {icon: Mail, title: "Email Check", desc: "Scan for breaches & leaks"},
+    {icon: Share, title: "Social Media Check", desc: "Verify digital footprints"},
+    {icon: Phone, title: "Phone Number Check", desc: "Identify risk profiles"}
 ]
