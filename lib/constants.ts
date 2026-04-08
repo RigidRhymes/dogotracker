@@ -1,3 +1,5 @@
+import {AtSign, MessageSquareDot, PhoneCall, ArrowRight} from 'lucide-react'
+
 export const NAV_ITEMS = [
     {href:'/', label: 'Home'},
     {href: '/platform', label: 'Platform'},
@@ -20,4 +22,10 @@ export const TESTIMONIALS = [
     {desc: 'We needed a solution that could scale with us. The self-learning AI adapts to our evolving threat landscape better than any manual system we’ve tried.', name: "Fatima Yusuf, Co-founder of ByteShield"},
     {desc: 'I’m not a tech expert, but this made privacy simple. One scan showed me where my email had been exposed—and helped me clean it up instantly', name: 'Emmanuel O., Lagos'},
    
+]
+
+export const HERO_CARD_ITEMS = [
+    {icon: AtSign, title: "EMAIL CHECK", desc: "Deep-scan billions of data breach records to determine if your professional or personal email has been compromised or listed as a target.", sub: "Initialize Scan", arrow: ArrowRight},
+    {icon: MessageSquareDot, title: "SOCIAL MEDIA CHECK", desc: "Analyze social handles against AI-identified malicious clusters and automated bot-nets to ensure identity integrity across platforms.", sub: "Verify Identity", arrow: ArrowRight},
+    {icon: PhoneCall, title: "PHONE NUMBER CHECK", desc: "Real-time lookup for VOIP masks, scam list associations, and suspicious geographical origin data to block proactive threats.", sub: "Check Carrier", arrow: ArrowRight},
 ]

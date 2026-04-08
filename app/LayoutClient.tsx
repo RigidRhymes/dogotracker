@@ -11,7 +11,7 @@ type Props = {
 const LayoutClient = ({ user, children }: Props) => {
     return(
         <main>
-            <Header user={user} />
+                <Header user={user} />
             <div>
                 {children}
             </div>
