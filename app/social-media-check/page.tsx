@@ -2,11 +2,7 @@ import React from 'react'
 
 const Page = () => {
     return (
-        <div className=''>
-            <div>
-
-            </div>
-        </div>
+        <div>Page</div>
     )
 }
 export default Page

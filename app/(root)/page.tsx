@@ -47,39 +47,46 @@ const Page = () => {
 
     return (
         <div className='wired-bg relative overflow-hidden'>
-           <div className='px-6 mb-12'>
+           <div className='sm:px-6 px-4 mb-12'>
                <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black'></div>
-               <div className='hero-grid'>
-                   <div className='sm:hidden flex items-center justify-center h-100 w-100 mt-12'>
-                       <Image src='/aimobile.png' alt='mobile AI image' width={100} height={100} className='object-cover w-full h-full z-10' />
+               <div className='grid grid-cols-1 sm:grid-cols-2 w-full'>
+                   <div className='sm:hidden flex items-center justify-center h-full w-full mt-12 relative'>
+                       <div className='shimmer-effect'>
+                       <Image src='/aimobile.png' alt='mobile AI image' width={450} height={500} className='object-cover' />
+                       </div>
                    </div>
 
                    {/*hero text-grid*/}
-                   <div className='flex sm:justify-start justify-center flex-col mt-12 '>
+                   <div className='flex sm:justify-start flex-col lg:mt-12 sm:mt-6 '>
                        <h1 className={`hero-text hidden sm:block ${spaceGrotesk.className}`}>DogoTracker</h1>
-                       <div className='w-full flex-wrap'>
+                       <div className='w-full flex-wrap mt-12'>
                            <div className='mobile-heading mb-2'>
                                <p className='text-white '>THE SENTIENT</p>
                                <p className='primary-text'>SECURITY LAYER</p>
                            </div>
-                           <div className='text-hero'>Mitigate every risk and shut down threats across every attack surface with Self-Learning AI that adapts to your business.
-                               <div className='sm:flex sm:flex-row primary-text sm:gap-2 font-semibold mt-4'>
+                           <div className='text-hero w-full flex flex-col items-center justify-center '>
+                               <p className='sm:text-lg'>Mitigate every risk and shut down threats across every attack surface with Self-Learning AI that adapts to your business.</p>
+                               <div className='w-full sm:flex sm:flex-row primary-text sm:gap-2 font-semibold mt-4 sm:text-lg lg:mt-12 sm:mt-6'>
                                    <p>Proactive,</p>
                                    <p>Intelligent,</p>
                                    <p>Dynamic.</p>
                                </div>
                            </div>
                        </div>
-                       <div className='relative flex mt-12 items-center justify-center sm:justify-start'>
-                           <div className='bg-[#00f2ff]/30 h-12 absolute sm:w-145 w-80 blur-xl  rounded-md'></div>
-                           <div className='text-gray-300 sm:gap-0 gap-3 text-sm w-80 sm:w-140 sm:p-2 p-2 border border-[#00f2ff]/20 sm:border-0 z-10 flex flex-row items-center justify-between bg-black rounded-sm'>
+
+                       {/**/}
+                       <div className='relative flex flex-col sm:mt-16 mt-6 sm:justify-start'>
+                           <div className='bg-[#00f2ff]/30 h-[80px] w-[200px] sm:h-[80px] absolute sm:w-[250px] lg:w-[500px] blur-2xl  rounded-md'></div>
+                           <div className='text-gray-300 sm:gap-0 gap-3 text-lg lg:w-150 md:w-120 sm: sm:p-2 p-2 border border-[#00f2ff]/20 sm:border-0 z-10 flex flex-row items-center justify-between bg-black rounded-sm'>
                                <ShieldCheck className='w-6 h-6 text-[#00f2ff]'/>
-                               <input type='text' placeholder='Enter email, handle or pone number... ' className='sm:p-2 sm:w-82 w-52 focus:outline-none focus:ring-1 focus:ring-[#00f2ff]/30'/>
+                               <input type='text' placeholder='Enter email, handle or pone number... ' className='sm:p-2 p-4 sm:w-82 w-52 focus:outline-none'/>
                                <button className='primary-col cursor-pointer p-2 w-28 font-bold text-black items-center jutify-center rounded-md sm:rounded-none'>
                                    Check
                                </button>
                            </div>
                        </div>
+
+                           {/*Mobile placeholder*/}
                            <div className='flex sm:hidden flex-row gap-4 mt-4 items-center z-50 justify-center'>
                                <div className='p-1 rounded-full bg-blue-950 border w-32 flex border-blue-600 text-white text-xs items-center justify-center'>LIVE LOGS ACTIVE</div>
                                <div className='p-1 rounded-full primary-text border w-32 flex items-center justify-center bg-[#00f2ff]/20 border-b-cyan-500 text-xs'>SENTIENT-4.2</div>
@@ -87,14 +94,13 @@ const Page = () => {
                    </div>
 
                    {/*image grid*/}
-                   <div className='w-full sm:flex justify-end mt-4  hidden '>
-                       <div className='relative w-[450px] h-[500px]'>
-                           <div className='bg-[#00f2ff]/20 w-[350px] h-[420px] absolute rounded-full blur-3xl'></div>
-                           <div className='hero-image border border-[#00f2ff]/20 z-10 shadow-[0_0_50px_rgba(0,242,255,0.1)]'>
-                               <div className='relative shimmer-effect w-full h-full rounded-md border border-[#00f2ff]/20'>
-                               <Image src='/aimobile.png' alt='hero-ai image' width={450} height={500} className='w-full h-full object-cover z-10' />
+                   <div className='w-full h-full sm:flex justify-end mt-4  hidden '>
+                       <div className='relative lg:w-[450px] lg:h-[500px] sm:w-[250px] sm:h-[300px] flex items-center justify-center'>
+                           <div className='bg-[#00f2ff]/20 lg:w-[500px] lg:h-[500px] sm:h-[300px] sm:w-[250px] absolute top-10 rounded-xl blur-2xl'></div>
+
+                               <div className='relative shimmer-effect lg:w-full lg:h-full sm:w-[250px] sm:h-[300px] rounded-md border border-[#00f2ff]/20'>
+                               <Image src='/aimobile.png' alt='hero-ai image' loading="eager" fill className=' object-cover flex rounded-md' />
                                </div>
-                           </div>
                        </div>
                    </div>
                </div>
@@ -152,7 +158,7 @@ const Page = () => {
 
                        <div className='flex flex-col items-center justify-center'>
                            <Infinity className='w-10 h-10 primary-text'/>
-                           <p className='text-gray-300 text-[10px] mt-2'>DAILY AI LOGS</p>
+                           <p className='text-gray-300 text-[10px] mt-2'>ADAPTIVE LEARNING</p>
                        </div>
                    </div>
                </div>
@@ -163,7 +169,7 @@ const Page = () => {
                     <h3 className={`primary-text text-sm font-bold ${spaceGrotesk.className}`}>DogoTracker AI</h3>
                     <p className='text-gray-500 text-xs'>&copy; 2025 DogoTracker AI. Sentient Security.</p>
                 </div>
-                <div className='flex flex-row items-center justify-center gap-4 text-gray-500 text-[10px]'>
+                <div className='flex flex-row items-center justify-center gap-4 text-gray-500 text-sm'>
                     <a>Privacy</a>
                     <a>Terms of Service</a>
                     <a>Contact Support</a>

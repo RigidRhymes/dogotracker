@@ -522,7 +522,7 @@
 }
 
 .hero-text {
-  @apply text-[52px]  font-bold;
+  @apply lg:text-[52px] sm:text-[42px] font-bold;
   background: linear-gradient( to right, #e1fdff, #00F2FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -530,7 +530,7 @@
 
 
 .hero-image {
-  @apply flex rounded-2xl aspect-square overflow-hidden mt-12 items-center justify-center w-[350px] h-[400px]
+  @apply flex rounded-2xl aspect-square overflow-hidden mt-12 items-center justify-center lg:w-[450px] lg:h-[500px] sm:w-[250px] sm:h-[300px]
 }
 
 .bg-effect{
@@ -538,7 +538,7 @@
 }
 
 .hero-grid {
-  @apply grid grid-cols-none sm:grid-cols-2 w-full
+
 }
 
 .primary-col{
@@ -552,7 +552,7 @@
 }
 
 .text-hero{
-  @apply text-gray-300 sm:text-2xl sm:mt-6 sm:text-start text-center mb-4 text-wrap
+  @apply text-gray-300 sm:text-2xl sm:mt-6 sm:text-start text-center mb-4
 }
 
 
@@ -619,7 +619,7 @@
 }
 
 .mobile-footer {
-  @apply flex flex-col sm:hidden relative h-48 bg-gray-700 border-t border-gray-600 z-50 w-full justify-center items-center
+  @apply flex flex-col sm:hidden relative h-32 bg-gray-700 border-t border-gray-600 z-50 w-full justify-center items-center
 }
 
 .shimmer-effect{
