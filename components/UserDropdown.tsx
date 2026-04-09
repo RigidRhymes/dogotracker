@@ -36,10 +36,10 @@ const UserDropdown = ({user} :{user: User}) => {
                 </div>
             </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="text-gray-400 bg-[#00F2FF]">
+        <DropdownMenuContent className="text-gray-400 bg-[#00F2FF]/20">
             <DropdownMenuLabel>
                 <div className="flex relative items-center gap-3 py-2 ">
-                    <Avatar className="h-10 w-10 bg-[#00f2ff]">
+                    <Avatar className="h-10 w-10 bg-[#00f2ff]/20">
                         <AvatarImage src='https://github.com/shadcn.png'/>
                         <AvatarFallback className=" text-black text-sm font-bold">
                             {user.name[0]}
