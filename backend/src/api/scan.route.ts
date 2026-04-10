@@ -1,7 +1,7 @@
 import { Router, Request } from 'express';
-import { requireAuth } from "../middleware/requireAuth";
-import { createScan } from "../db/scan.model";
-import {db} from '../db'
+import { requireAuth } from "@/middleware/requireAuth";
+import { createScan } from "@/db/scan.model";
+import {db} from '@/db'
 import { scanEmailRisk } from "./scanEmailRisk"
 
 
