@@ -4,13 +4,25 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "..",   // project root
     "strict": true,
     "esModuleInterop": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/lib/*": ["../lib/*"],
+      "@/database/*": ["../database/*"]
+    }
   },
   "include": [
     "src/**/*",
-    "src/**/*.d.ts"
+    "../lib/**/*",
+    "../database/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
   ]
 }

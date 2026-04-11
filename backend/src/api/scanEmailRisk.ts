@@ -14,11 +14,6 @@ export interface ScanResult {
 
 
 export async function scanEmailRisk(email: string) : Promise<ScanResult> {
-    const isValid = await checkGravatar(email);
-    const hasGravatar = await checkGravatar(email);
-    const foundOnGitHub = await checkGravatar(email);
-    const publicMentions = await checkGravatar(email);
-    const foundInBreaches = false;
 
     const results: ScanResult = {
         email,

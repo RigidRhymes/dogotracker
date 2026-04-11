@@ -1,36 +1,40 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import {getAuth} from "@/lib/better-auth/auth";
 
-type RequestWithUser = Request & { user?: JwtPayload & { id: string; email?: string } };
 
-export function requireAuth(req: RequestWithUser, res: Response, next: NextFunction) {
-    const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
+type RequestWithUser = Request & {
+    user?: {id: string; email?: string }
+}
 
-    const token = authHeader.split(' ')[1];
-    if (!token) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    const secret = process.env.JWT_SECRET;
-    if (!secret) {
-        // Server misconfiguration: no JWT secret
-        return res.status(500).json({ error: 'Server configuration error' });
-    }
-    console.log('JWT_secret:', secret)
-    console.log('Token', token)
+export async function requireAuth(req: RequestWithUser, res:Response, next:NextFunction){
     try {
-        const decoded = jwt.verify(token, secret) as JwtPayload | string;
-        if (typeof decoded === 'string') {
-            // Unexpected token payload format
-            return res.status(401).json({ error: 'Invalid token' });
+        const auth = await getAuth()
+
+        const headers = new Headers()
+
+        for (const [key, value] of Object.entries(req.headers)){
+            if (typeof value === "string") {
+                headers.append(key, value)
+            }else if (Array.isArray(value)) {
+                for(const v of value ) headers.append(key, v)
+            }
         }
-        req.user = decoded as JwtPayload & { id: string; email?: string };
-        return next();
-    } catch (err) {
-        return res.status(401).json({ error: 'Invalid token' });
+
+        const session = await auth.api.getSession({ headers })
+
+        if (!session) {
+            return res.status(401).json({error: "Unauthorized"})
+        }
+
+        req.user = {
+            id: session.user.id,
+            email: session.user.email,
+        }
+
+        return next()
+    }catch (err){
+        console.error("Auth check failed: ", err)
+        return res.status(500).json({error: "Server error during auth"})
     }
 }
