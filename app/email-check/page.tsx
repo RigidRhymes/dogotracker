@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react'
 import {Space_Grotesk} from "next/font/google";
-import { ShieldCheck, Radar, Lock } from "lucide-react"
+import { ShieldCheck, Radar, Lock, Check, Info, TriangleAlert } from "lucide-react"
 import Scanner from "@/app/email-check/scanner";
 import ThreatMatrix from "@/app/email-check/threat-matrix"
 import Vault from "./vault"
@@ -82,7 +82,61 @@ const Page = () => {
                         {activePage === "vault" && <Vault />}
                     </div>
                 </div>
-                <div className='col-span-1  w-full h-full '>hello</div>
+                <div className='col-span-1  w-full h-full px-4'>
+                    <div className='scan-result-right'>
+                        <h3 className='text-gray-500 font-bold'>RECENT SCANS</h3>
+                        <div className='mt-6'>
+
+                            {/*Email Check*/}
+                            <div className='scan-result-card'>
+                                <div className='flex justify-between '>
+                                    <h2 className='primary-text text-lg font-bold '>EMAIL CHECK</h2>
+                                    <p className='text-gray-400 text-xs'>2m ago</p>
+                                </div>
+                                    <div className='mt-6'>
+                                        <p className='text-gray-300'>example@mail.com</p>
+                                    </div>
+                                <div className='mt-4 flex items-center justify-start gap-2'>
+                                    <div className='primary-col items-center justify-center flex rounded-full w-4 h-4'><Check className='w-3 h-3 font-bold' /></div>
+                                    <p className='text-gray-300 font-sm font-bold'>Cleared -Breaches</p>
+                                </div>
+                            </div>
+
+                        {/*    Social Check*/}
+                            <div className='scan-result-card-one mt-4'>
+                                <div className='flex justify-between '>
+                                    <h2 className='text-orange-300 text-lg font-bold '>SOCIAL CHECK</h2>
+                                    <p className='text-gray-400 text-xs'>2m ago</p>
+                                </div>
+                                <div className='mt-6'>
+                                    <p className='text-gray-300'>@olajide_olalekan</p>
+                                </div>
+                                <div className='mt-4 flex items-center justify-start gap-2'>
+                                    <div className='bg-gray-300 p-1 items-center justify-center flex rounded-full w-4 h-4'><Info className='w-3 h-3 font-bold' /></div>
+                                    <p className='text-gray-300 font-sm font-bold'>Cleared -Breaches</p>
+                                </div>
+                            </div>
+
+                        {/*    Phone Number Check*/}
+
+                            <div className='scan-result-card-two mt-4'>
+                                <div className='flex justify-between '>
+                                    <h2 className='text-blue-300 text-lg font-bold '>PHONE CHECK</h2>
+                                    <p className='text-gray-400 text-xs'>6m ago</p>
+                                </div>
+                                <div className='mt-6'>
+                                    <p className='text-gray-300'>+234-60600-3233</p>
+                                </div>
+                                <div className='mt-4 flex items-center justify-start gap-2'>
+                                    <div className='bg-red-700 items-center justify-center flex rounded-full w-4 h-4'><TriangleAlert className='w-3 h-3 font-bold' /></div>
+                                    <p className='text-gray-300 font-sm p-1 font-bold'>High Risk: VOIP spoof</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
         </div>
     )

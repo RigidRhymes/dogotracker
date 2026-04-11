@@ -1,7 +1,6 @@
 import { Router, Request } from 'express';
 import { requireAuth } from "@/middleware/requireAuth";
-import { createScan } from "@/db/scan.model";
-import {db} from '@/db'
+import { createScan, getScan, updateScanResult } from "@/db/scan.model";
 import { scanEmailRisk } from "./scanEmailRisk"
 
 
@@ -17,10 +16,8 @@ scanRouter.post('/', requireAuth, async (req: Request & { user?: { id: string; e
     }
 
     try {
-
         const scan = await createScan(userId, email)
-        res.status(201).json({scanId: scan.id})
-
+        res.status(201).json({ scanId: scan.id })
 
         setTimeout(async () => {
             try {
@@ -49,17 +46,11 @@ scanRouter.post('/', requireAuth, async (req: Request & { user?: { id: string; e
                 console.log(`Scanning email: ${email}`);
                 console.log(`Found ${riskResult.publicMentions.length} mentions`);
 
-                await db.query(
-                    `UPDATE scans SET status = 'completed', updated_at = NOW(), result = $2 WHERE id = $1`,
-                    [scan.id, JSON.stringify(result)]
-                );
+                await updateScanResult(scan.id, result, 'completed');
             } catch (err) {
                 console.error("Failed to update scan status", err);
                 const errorMessage = err instanceof Error ? err.message : String(err);
-                await db.query(
-                    `UPDATE scans SET status = 'failed', updated_at = NOW(), result = $2 WHERE id = $1`,
-                    [scan.id, JSON.stringify({ error: errorMessage })]
-                );
+                await updateScanResult(scan.id, { error: errorMessage }, 'failed');
             }
         }, 5000);
 
@@ -67,25 +58,21 @@ scanRouter.post('/', requireAuth, async (req: Request & { user?: { id: string; e
         console.error('Scan creation failed:', err);
         return res.status(500).json({ error: 'Database error' });
     }
-
 });
 
 scanRouter.get('/:id', requireAuth, async (req: Request & {user?: {id: string} }, res) => {
     const {id} = req.params;
 
     try {
-        const result = await db.query(
-            `SELECT * FROM scans WHERE id= $1 AND user_id = $2`,
-            [id, req.user?.id]
-        );
+        const result = await getScan(id, req.user?.id as string);
 
-        if(result.rows.length === 0){
-            return res.status(404).json({error: 'Scan not found'})
+        if (!result) {
+            return res.status(404).json({ error: 'Scan not found' })
         }
-        return res.json(result.rows[0]);
-    }catch (err){
+        return res.json(result);
+    } catch (err) {
         console.error('Scan fetch failed:', err);
-        return res.status(500).json({error: 'Database error'})
+        return res.status(500).json({ error: 'Database error' })
     }
 })
 

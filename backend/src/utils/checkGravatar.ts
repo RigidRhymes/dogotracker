@@ -9,19 +9,22 @@ export async function checkGravatar(email: string): Promise<boolean> {
     return res.status === 200
 }
 
-export async function searchGitHub(email: string): Promise<boolean> {
-    const url = `https://api.github.com/search/commits?q=author:${encodeURIComponent(email)}`
-    const res = await fetch(url, {
-        headers: {
-            Accept: "application/vnd.github.cloak-preview",
-            // Authorization: `Bearer ${process.env.GITHUB_TOKEN}` // recommended
-        },
-    })
+export async function searchGitHub(email: string, username?: string): Promise<boolean> {
+    const headers = {
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Accept: "application/vnd.github.cloak-preview+json"
+    }
+
+
+
+    const globalUrl = `https://api.github.com/search/commits?q=author:${encodeURIComponent(email)}`
+    const res = await fetch(globalUrl, { headers  })
 
     if (!res.ok) {
         console.error("GitHub search failed:", res.statusText)
         return false
     }
+    console.log(process.env.GITHUB_TOKEN)
 
     const data = await res.json()
     return data.total_count > 0
