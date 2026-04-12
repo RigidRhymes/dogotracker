@@ -5,11 +5,11 @@ import {getAuth} from "@/lib/better-auth/auth";
 
 
 
-export const signUpWithEmail = async({email, password, fullName, country}: {email: string, password: string, fullName:string, country: string}) => {
+export const signUpWithEmail = async({email, password, fullName}: {email: string, password: string, fullName:string, country: string}) => {
     try {
         const auth = await getAuth()
         const response = await auth.api.signUpEmail({
-            body: {email, password, name: fullName, country}
+            body: {email, password, name: fullName}
         })
         if(response){
            return {success: true, data: response}
@@ -52,9 +52,6 @@ export const signInWithEmail = async({email, password}: {email: string, password
         if(response){
             return {success: true, data: response}
         }
-
-        const result = await signInWithEmail(data);
-        console.log("Login result:", result);
 
         return {success: false, error: "No token returned from signIn "}
     }catch (e){
