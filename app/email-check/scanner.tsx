@@ -115,7 +115,7 @@ const Scanner = () => {
                         <div className='flex items-center justify-between gap-2'>
                             <div className='mt-12 border-b-2 border-[#00f2ff] flex items-center gap-4 p-1 bg-black'>
                                 <Search className='primary-text w-8 h-8'/>
-                                <input value={email} onChange={e => setEmail(e.target.value)} placeholder='example@email.com' className='text-gray-500 rounded-md p-2 text-2xl focus:outline-none active:bg-[#00f2ff]/20'/>
+                                <input value={email} name='text' type='email' onChange={e => setEmail(e.target.value)} placeholder='example@email.com' className='text-gray-500 rounded-md p-2 text-2xl focus:outline-none active:bg-[#00f2ff]/20'/>
                             </div>
                             <div className='bg-[#00f2ff] absolute rounded-full h-[38px] w-[38px] blur-3xl'></div>
                             <div className='relative mb-8 flex gap-4 items-center justify-center'>

@@ -4,16 +4,17 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "dist",
-    "rootDir": "..",
+    "rootDir": "src",
     "strict": true,
+    "baseUrl": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
-      "@/*": ["src/*"]
-    },
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+      "@/*": ["src/*"],
+      "lib/*": ["lib/*"]
+    }
   },
-  "include": ["src/**/*", "../lib/better-auth/**/*", "../database/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["dist", "node_modules"]
 }

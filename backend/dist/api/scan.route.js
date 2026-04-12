@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.scanRouter = void 0;
 const express_1 = require("express");
-const requireAuth_1 = require("@/middleware/requireAuth");
 const scan_model_1 = require("@/db/scan.model");
 const scanEmailRisk_1 = require("./scanEmailRisk");
+const requireAuth_1 = require("../middleware/requireAuth");
 // This file is for search mentions
 exports.scanRouter = (0, express_1.Router)();
 exports.scanRouter.post('/', requireAuth_1.requireAuth, async (req, res) => {
@@ -64,6 +64,7 @@ exports.scanRouter.get('/:id', requireAuth_1.requireAuth, async (req, res) => {
     }
     catch (err) {
         console.error('Scan fetch failed:', err);
+        const errorMessage = err instanceof Error ? err.message : String(err);
         return res.status(500).json({ error: 'Database error' });
     }
 });

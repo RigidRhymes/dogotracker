@@ -1,7 +1,8 @@
 import { Router, Request } from 'express';
-import { requireAuth } from "@/middleware/requireAuth";
+
 import { createScan, getScan, updateScanResult } from "@/db/scan.model";
 import { scanEmailRisk } from "./scanEmailRisk"
+import {requireAuth} from "../middleware/requireAuth";
 
 
 // This file is for search mentions
@@ -72,6 +73,7 @@ scanRouter.get('/:id', requireAuth, async (req: Request & {user?: {id: string} }
         return res.json(result);
     } catch (err) {
         console.error('Scan fetch failed:', err);
+        const errorMessage = err instanceof Error ? err.message: String(err)
         return res.status(500).json({ error: 'Database error' })
     }
 })
