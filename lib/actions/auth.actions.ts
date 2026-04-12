@@ -9,11 +9,21 @@ export const signUpWithEmail = async({email, password, fullName, country}: {emai
     try {
         const auth = await getAuth()
         const response = await auth.api.signUpEmail({
-            body: {email, password, name: fullName}
+            body: {email, password, name: fullName, country}
         })
         if(response){
-           return {success: true}
+           return {success: true, data: response}
         }
+
+        const loginResponse = await auth.api.signInEmail({
+            body: {email, password},
+        })
+
+        if(loginResponse){
+            return {success: true, data: loginResponse}
+        }
+
+        return { success: false, error: "No token returned after signUp "}
     }catch (e){
         console.log('Sign up failed', e)
         return {success: false, error: 'Sign up failed'}
@@ -38,7 +48,15 @@ export const signInWithEmail = async({email, password}: {email: string, password
         const response = await auth.api.signInEmail({
             body: {email, password}
         })
-        return {success: true, data: response}
+
+        if(response){
+            return {success: true, data: response}
+        }
+
+        const result = await signInWithEmail(data);
+        console.log("Login result:", result);
+
+        return {success: false, error: "No token returned from signIn "}
     }catch (e){
         console.log('Sign in failed', e)
         return {success: false, error: 'Sign in failed'}

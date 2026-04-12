@@ -24,62 +24,72 @@ type ScanResult = {
    summary: string
 }
 
+const API_BASE = "https://dogo-backend-7idt.onrender.com"
+
 const Scanner = () => {
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
     const [results, setResults] = useState<ScanResult | null>(null)
-
+    const [token, setToken] = useState<string | null>(null)
 
     const handleScan = async () => {
-        if(!email){
-            console.log('Input email for search')
-            return
+        if (!email) {
+            console.log("Input email for search");
+            return;
         }
 
-        setLoading(true)
+        setLoading(true);
         try {
-            const res = await fetch(`/api/scan`, {
+            // 1. Start scan
+            const res = await fetch(`${API_BASE}/api/scan`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email }),
-                credentials: "include",
+                credentials: "include",   // ✅ send BetterAuth cookie
             });
+
+            if (!res.ok) {
+                console.error("Scan request failed", res.status);
+                return;
+            }
 
             const { scanId } = await res.json();
 
+            // 2. Poll for results
             let done = false;
-            let retries = 0
-            const maxRetries = 20
+            let retries = 0;
+            const maxRetries = 20;
 
-            while(!done && retries < maxRetries ){
-                retries++
+            while (!done && retries < maxRetries) {
+                retries++;
 
-                const poll = await fetch(`/api/scan/${scanId}`, {
-                    credentials: "include",
+                const poll = await fetch(`${API_BASE}/api/scan/${scanId}`, {
+                    credentials: "include",   // ✅ send cookie
                 });
 
-                if(!poll.ok){
-                    console.error("Polling failed", poll.status)
-                    break
+                if (!poll.ok) {
+                    console.error("Polling failed", poll.status);
+                    break;
                 }
 
                 const data = await poll.json();
 
-                if(data.status === 'completed' || data.status === 'failed'){
+                if (data.status === "completed" || data.status === "failed") {
                     setResults(data.result);
                     done = true;
-                }else {
+                } else {
                     await new Promise(r => setTimeout(r, 3000));
                 }
             }
-        }catch (err){
-            console.log("Scan failed",err)
-        }finally {
-            setLoading(false)
+        } catch (err) {
+            console.error("Scan failed", err);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
+
 
     const handleReset = () => {
         setEmail("")
@@ -105,7 +115,7 @@ const Scanner = () => {
                         <div className='flex items-center justify-between gap-2'>
                             <div className='mt-12 border-b-2 border-[#00f2ff] flex items-center gap-4 p-1 bg-black'>
                                 <Search className='primary-text w-8 h-8'/>
-                                <input value={email} onChange={e => setEmail(e.target.value)} placeholder='example@email.com' className='text-gray-500 rounded-md p-2 text-2xl focus:outline-none active:bg-[#00f2ff]/20'/>
+                                <input value={email} name='text' type='email' onChange={e => setEmail(e.target.value)} placeholder='example@email.com' className='text-gray-500 rounded-md p-2 text-2xl focus:outline-none active:bg-[#00f2ff]/20'/>
                             </div>
                             <div className='bg-[#00f2ff] absolute rounded-full h-[38px] w-[38px] blur-3xl'></div>
                             <div className='relative mb-8 flex gap-4 items-center justify-center'>
