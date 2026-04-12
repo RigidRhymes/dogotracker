@@ -1,18 +1,32 @@
-import { NextResponse } from "next/server";
-import { getAuth } from "@/lib/better-auth/auth";
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-    const auth = await getAuth();
-    const session = await auth.api.getSession({ headers: req.headers });
+// Define the type with a Promise for params
+type Context = {
+    params: Promise<{ id: string }>;
+};
 
-    if (!session) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+export async function GET(
+    request: NextRequest,
+    context: Context
+) {
+    // 1. Await params (Required in Next.js 15)
+    const { id } = await context.params;
 
-    const res = await fetch(`https://dogo-backend-7idt.onrender.com/api/scan/${params.id}`, {
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
+    // 2. Manual cookie forwarding (if proxying auth)
+    const cookieStore = await cookies();
+    const allCookies = cookieStore.toString();
+
+    const res = await fetch(`https://dogo-backend-7idt.onrender.com/api/scan/${id}`, {
+        headers: {
+            "Content-Type": "application/json",
+            "Cookie": allCookies // Forwarding auth to backend
+        },
     });
+
+    if (!res.ok) {
+        return NextResponse.json({ error: "Failed to fetch" }, { status: res.status });
+    }
 
     const data = await res.json();
     return NextResponse.json(data);
