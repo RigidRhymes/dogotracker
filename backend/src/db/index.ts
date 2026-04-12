@@ -10,3 +10,9 @@ export const db = new Pool({
     password: process.env.PGPASSWORD ?? '',
     database: process.env.PGDATABASE ?? 'postgres',
 })
+
+export const connectDB = async () => {
+    const client = await db.connect()
+    client.release()
+    return db
+}

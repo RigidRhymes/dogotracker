@@ -8,13 +8,16 @@ const express_1 = __importDefault(require("express"));
 const scan_route_1 = require("./api/scan.route");
 const cors_1 = __importDefault(require("cors"));
 const node_fetch_1 = __importDefault(require("node-fetch"));
+const requireAuth_1 = require("@/middleware/requireAuth");
+const auth_route_1 = require("./api/auth.route");
 exports.app = (0, express_1.default)();
 exports.app.use((0, cors_1.default)({
     origin: 'http://localhost:3000',
     credentials: true
 }));
 exports.app.use(express_1.default.json());
-exports.app.use('/api/scan', scan_route_1.scanRouter);
+exports.app.use("/auth", auth_route_1.authRouter);
+exports.app.use('/api/scan', requireAuth_1.requireAuth, scan_route_1.scanRouter);
 exports.app.get("/ai-test", async (req, res) => {
     const prompt = "Summarize risks of using an email found in breach.";
     try {

@@ -1,17 +1,18 @@
 import {app} from './server';
-import {db} from './db';
+import {connectDB} from "./db/index";
+
 
 
 const PORT = process.env.PORT || 4000;
 
-db.connect()
-.then(() => {
-    console.log('Database connected to PostgresSQL');
-    app.listen(PORT, () => {
-        console.log(`Server running at http://localhost:${PORT}`)
+
+connectDB().then(() => {
+        console.log("Database connected to MongoDB atlas");
+        app.listen(PORT, () => {
+            console.log(`server running at http:localhost:${PORT}`);
+        });
     })
-})
-.catch(err => {
-    console.error('PostgresSQL connection failed:', err)
-    process.exit(1);
-})
+    .catch((err: Error ) => {
+        console.error("MongoDB connection failed:", err);
+        process.exit(1);
+    })

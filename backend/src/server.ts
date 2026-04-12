@@ -2,6 +2,8 @@ import express from 'express';
 import {scanRouter} from "./api/scan.route";
 import cors from 'cors'
 import fetch from "node-fetch"
+import {requireAuth} from "@/middleware/requireAuth";
+import { authRouter} from "./api/auth.route";
 
 export const app = express();
 
@@ -11,7 +13,8 @@ app.use(cors({
 }))
 app.use(express.json())
 
-app.use('/api/scan', scanRouter)
+app.use("/auth", authRouter)
+app.use('/api/scan', requireAuth, scanRouter)
 
 app.get("/ai-test", async (req, res) => {
     const prompt = "Summarize risks of using an email found in breach.";
