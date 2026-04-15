@@ -5,6 +5,7 @@ import {getAuth} from "@/lib/better-auth/auth";
 
 
 
+
 export const signUpWithEmail = async({email, password, fullName}: {email: string, password: string, fullName:string, country: string}) => {
     try {
         const auth = await getAuth()
@@ -59,3 +60,4 @@ export const signInWithEmail = async({email, password}: {email: string, password
         return {success: false, error: 'Sign in failed'}
     }
 }
+

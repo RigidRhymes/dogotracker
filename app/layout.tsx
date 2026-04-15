@@ -25,8 +25,8 @@ const raleway = Raleway({
     weight: ['100','400', '700']
 })
 export const metadata: Metadata = {
-  title: "DogoTracker is a privacy-first web app that empowers users to monitor their digital footprint. Scan the internet for traces of your email, visualize your online presence, and use AI to manage or request deletion of your data—securely and on your terms.",
-  description: "",
+  title: "DogoTracker",
+  description: "is a privacy-first web app that empowers users to monitor their digital footprint. Scan the internet for traces of your email, visualize your online presence, and use AI to manage or request deletion of your data—securely and on your terms.",
 };
 
 export default function RootLayout({
